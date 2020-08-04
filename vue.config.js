@@ -9,7 +9,7 @@ const name = 'VUEDEMO' // page title
 const port = 4080 // dev port
 
 module.exports = {
-  publicPath: '/public',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
