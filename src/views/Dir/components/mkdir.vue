@@ -2,6 +2,7 @@
   <div class="mkdirs">
     <div class="logo" @click="contentShow = !contentShow">
       <img :src="contentShow ? MkdirImgRed : MkdirImg" />
+      <p>{{ data.name }}</p>
     </div>
     <div v-if="contentShow" class="content">
       <mkdir-child :mkdir="data.child" :base-url="baseUrl + data.name + '/'" />
@@ -45,6 +46,12 @@
   text-align: center;
   .logo {
     cursor: pointer;
+    position: relative;
+    p {
+      position: relative;
+      top: -90px;
+      color: white;
+    }
   }
 }
 </style>

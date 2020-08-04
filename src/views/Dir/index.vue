@@ -53,5 +53,6 @@
   flex-wrap: wrap;
   flex-direction: column;
   padding: 20px 30px;
+  background-color: rgba(0,0,0, .1);
 }
 </style>
