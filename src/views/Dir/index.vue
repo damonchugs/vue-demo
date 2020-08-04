@@ -1,7 +1,12 @@
 <template>
   <div class="mkdir">
     <div v-for="(t, index) in mkdir" :key="index">
-      <Imgs v-if="['jpg', 'png', 'jpeg', 'bmp', 'gif', 'webp'].includes(t.type)" :data="t" :base-url="baseUrl" />
+      <Imgs
+        v-if="['jpg', 'png', 'jpeg', 'bmp', 'gif', 'webp'].includes(t.type)"
+        :data="t"
+        :base-url="baseUrl"
+        :srcList="srcLists"
+      />
       <Videos v-if="['mpeg', 'mp4', 'avi', 'rmvb', 'wmv', 'mkv'].includes(t.type)" :data="t" :base-url="baseUrl" />
       <Mkdirs v-if="['dir'].includes(t.type)" :data="t" :base-url="baseUrl" />
     </div>
@@ -25,6 +30,15 @@
         type: String,
         default() { return 'http://192.168.100.71:2423/test/' }
       }
+    },
+    computed: {
+      srcLists() {
+        const srcs = []
+        this.mkdir.filter(te => ['jpg', 'png', 'jpeg', 'bmp', 'gif', 'webp'].includes(te.type)).map(t => {
+          srcs.push(this.baseUrl + t.name)
+        })
+        return srcs
+      } 
     },
     mounted() {
       console.log(this.mkdir)
