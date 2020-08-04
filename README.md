@@ -1,7 +1,7 @@
 # vue-demo
 
 ## Mkdir
-Home     ---------------     首页
+Home     ---------------     首页  
 Mkdir    ---------------     文件查看系统
 
 ## Project setup
