@@ -31,9 +31,6 @@
         MkdirImg, MkdirImgRed,
         contentShow: false
       }
-    },
-    mounted() {
-      console.log(this.data, this.baseUrl)
     }
   }
 </script>

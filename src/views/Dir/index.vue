@@ -2,12 +2,12 @@
   <div class="mkdir">
     <div v-for="(t, index) in mkdir" :key="index">
       <Imgs
-        v-if="['jpg', 'png', 'jpeg', 'bmp', 'gif', 'webp'].includes(t.type)"
+        v-if="format_img(t.type)"
         :data="t"
         :base-url="baseUrl"
         :srcList="srcLists"
       />
-      <Videos v-if="['mpeg', 'mp4', 'avi', 'rmvb', 'wmv', 'mkv'].includes(t.type)" :data="t" :base-url="baseUrl" />
+      <Videos v-if="format_video_audio(t.type)" :data="t" :base-url="baseUrl" />
       <Mkdirs v-if="['dir'].includes(t.type)" :data="t" :base-url="baseUrl" />
     </div>
   </div>
@@ -40,8 +40,24 @@
         return srcs
       } 
     },
-    mounted() {
-      console.log(this.mkdir)
+    methods: {
+      format_img(type) {
+        const format = [
+          'webp', 'bmp', 'pcx', 'tif', 'git', 'jpeg',
+          'tga', 'exif', 'fpx', 'svg', 'psd', 'cdr',
+          'pcd', 'dxf', 'ufo', 'eps', 'ai', 'png', 'hdri',
+          'raw', 'wmf', 'flic', 'emf', 'ico', 'jpg'
+        ]
+        return format.includes(type.toLowerCase())
+      },
+      format_video_audio(type) {
+        const format = [
+          'mpeg', 'avi', 'navi', 'asf', 'mov', 'wmv',
+          '3gp', 'rm', 'rmvb', 'flv', 'f4v', 'h.265', 'h.265',
+          'mp4', 'mkv', 'divx', 'xvid', 'aac'
+        ]
+        return format.includes(type.toLowerCase())
+      }
     }
   }
 </script>
