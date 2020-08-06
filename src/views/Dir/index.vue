@@ -14,9 +14,9 @@
 </template>
 
 <script>
-  import Imgs from "@/views/Dir/components/img";
-  import Videos from "@/views/Dir/components/video";
-  import Mkdirs from "@/views/Dir/components/mkdir";
+  import Imgs from "./components/img";
+  import Videos from "./components/video";
+  import Mkdirs from "./components/mkdir";
   import MkdirData from "@/utils/mkdir.js";
   export default {
     name: 'MKDIR',
