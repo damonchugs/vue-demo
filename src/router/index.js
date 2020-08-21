@@ -39,6 +39,10 @@ export const constantRoutes = [
   {
     path: '/Notice',
     component: () => import('@/views/Notice/index')
+  },
+  {
+    path: '/mapboxs',
+    component: () => import('@/views/MapBox/index')
   }
 ]
 
