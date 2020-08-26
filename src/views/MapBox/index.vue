@@ -1,10 +1,14 @@
 <template>
   <div class="map-box">
     <div id="map-box-gl"></div>
+    <div class="btn-box">
+      <div class="btns" @click="getData">画线</div>
+    </div>
   </div>
 </template>
 
 <script>
+import { getMapData } from '@/api/index'
 // eslint-disable-next-line no-undef
 const Mapboxgl = mapboxgl;
 export default {
@@ -23,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    this.initMap();
+    this.initMap()
   },
   methods: {
     initMap() {
@@ -33,7 +37,7 @@ export default {
       this.maps = new Mapboxgl.Map({
         container: "map-box-gl",
         style: "mapbox://styles/mapbox/streets-v10",
-        center: [121.278603, 31.199802],
+        center: [121.26759791631557, 31.196127285084458],
         zoom: 12,
         attributionControl: false,
       });
@@ -51,7 +55,9 @@ export default {
         // this.addMarker()
         const { lng, lat } = this.maps.getCenter();
         this.addMarker(lng, lat);
-        this.addLine(this.geoCode);
+        this.addMarker(121.278603, 31.199802);
+        // this.addLine(this.geoCode);
+        // this.getData()
         this.showpPopup()
       });
     },
@@ -60,7 +66,7 @@ export default {
         .setLngLat([lng, lat])
         .addTo(this.maps);
     },
-    addLine(coordinates) {
+    addLine(id, coordinates, color = '#2453ab') {
       const geoJson = {
         type: "FeatureCollection",
         features: [
@@ -74,7 +80,7 @@ export default {
         ],
       };
       this.maps.addLayer({
-        id: "lines",
+        id: "lines" + id,
         type: "line",
         source: {
           type: "geojson",
@@ -85,7 +91,7 @@ export default {
           "line-join": "round",
         },
         paint: {
-          "line-color": "#2453ab",
+          "line-color": color,
           "line-width": 5,
           "line-opacity": 0.8,
         },
@@ -128,6 +134,42 @@ export default {
     clearMap() {
       this.popup.remove()
       this.marker.remove()
+    },
+    getData() {
+      const url = 'http://114.55.251.153:8011/Api/BasicPointCorrect/GetRoadPointListByRoadId'
+      const data = { CompanyCode: '0791RYGLS', RoadId: 1439, RoadName: 'G60' }
+      getMapData(url, data)
+        .then(res => {
+          const datas = []
+          const points = []
+          res.Json[3].loc.map((t, index, arr) => {
+            if (index % 2 === 0) {
+              points.push([arr[index], arr[index + 1]])
+            }
+          })
+          for(var i = 1; i < 50; i++) {
+            points.map((t) => {
+              datas.push([t[0], t[1] + 0.1 * i])
+            })
+            points.reverse()
+          }
+          let num = 0
+          let color = 'red'
+          let len = 0
+          datas.map((t, inv) => {
+            if( inv !== 0 && inv % 5000 === 0) {
+              const arr = datas.filter((t, index) => index > len && index <= inv)
+              this.addLine(inv, arr, color)
+              len = inv
+              num++
+              color = color === 'red' ? 'blue' : 'red'
+            }
+          })
+          console.log(num)
+          // datas.filter((t, index) => index <= 300).map(t=> {
+          //   this.addMarker(t[0], t[1])
+          // })
+        })
     }
   },
 };
@@ -141,6 +183,27 @@ export default {
   #map-box-gl {
     width: 100%;
     height: 100%;
+  }
+  .btn-box {
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background-color: rgba(255,255,255, .7);
+    .btns {
+      width: 100px;
+      padding: 3px 10px;
+      border-radius: 5px;
+      background-color: green;
+      color: white;
+      cursor: pointer;
+      opacity: 1;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }
 </style>
