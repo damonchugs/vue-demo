@@ -9,8 +9,8 @@ const name = 'VUEDEMO' // page title
 const port = 4080 // dev port
 
 module.exports = {
-  publicPath: '/',
-  outputDir: 'dist',
+  publicPath: '/vue-demo',
+  outputDir: 'vue-demo',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,

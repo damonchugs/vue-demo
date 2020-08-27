@@ -43,6 +43,10 @@ export const constantRoutes = [
   {
     path: '/mapboxs',
     component: () => import('@/views/MapBox/index')
+  },
+  {
+    path: '/grid',
+    component: () => import('@/views/Grid/index')
   }
 ]
 
