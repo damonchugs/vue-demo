@@ -27,7 +27,7 @@
    * 百度坐标系 (BD-09) 与 火星坐标系 (GCJ-02)的转换
    * 即 百度 转 谷歌、高德
    * @param bd_lon
-   * @param bd_lat
+   * @param bd_lat 
    * @returns {*[]}
    */
   var bd09togcj02 = function bd09togcj02(bd_lon, bd_lat) {

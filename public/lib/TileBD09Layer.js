@@ -707,6 +707,10 @@ window.TileBD09Layer = (function() {
       var wgs84SE = coordtransform.gcj02towgs84(guojiaSE[0], guojiaSE[1]);
       var wgs84NW = coordtransform.gcj02towgs84(guojiaNW[0], guojiaNW[1]);
 
+      // return baiduWgsSW
+      //   .concat(baiduWgsNE)
+      //   .concat(baiduWgsSE)
+      //   .concat(baiduWgsNW)
       return wgs84SW
         .concat(wgs84NE)
         .concat(wgs84SE)

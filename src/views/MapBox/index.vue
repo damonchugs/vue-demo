@@ -38,7 +38,7 @@ export default {
         "pk.eyJ1IjoibHVrYXNtYXJ0aW5lbGxpIiwiYSI6ImNpem85dmhwazAyajIyd284dGxhN2VxYnYifQ.HQCmyhEXZUTz3S98FMrVAQ";
       this.maps = new Mapboxgl.Map({
         container: 'map-box-gl',
-        center:  [121.26759791631557, 31.196127285084458],
+        center:  [121.278603, 31.199802],
         zoom: 12,
         fadeDuration:0,
         style: {
@@ -62,12 +62,13 @@ export default {
         var tileLayer = new TileBD09Layer({
           url: `http://api2.map.bdimg.com/customimage/tile/?x={x}&y={y}&z={z}&scale=2&udt=20200825&styles=${this.styles}`
           // url:"http://online1.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=pl&scaler=4&color_dep=32&colors=30&udt=20200426"
-          //url:"http://maponline0.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=1&udt=20200611&from=jsapi2_0"
+          // url: "http://maponline0.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=20200611&from=jsapi2_0"
         });
 
         tileLayer.addTo(this.maps);
         // 添加点
         this.addMarker(121.26759791631557, 31.196127285084458)
+        this.addMarker(121.278603, 31.199802)
         // 添加信息框
         this.showpPopup()
         // 添加线
